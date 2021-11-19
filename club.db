@@ -1,2 +1,10 @@
-DELETE FROM membership WHERE main_member='pra';
-DELETE FROM membership WHERE main_member='29';
+create table employee
+(
+    eid          INT     not null
+        primary key,
+
+    desiganation VARCHAR not null,
+    salary       INT     not null,
+    mid          INT     not null
+        references manager
+);
