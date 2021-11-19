@@ -1,14 +1,2 @@
-CREATE TABLE attendance
-(
-  date INT NOT NULL,
-  mem_no INT NOT NULL,
-  time INT NOT NULL,
-  act_name INT NOT NULL,
-  name INT NOT NULL,
-  f_no INT NOT NULL,
-  a_no INT NOT NULL,
-  eid INT NOT NULL,
-  FOREIGN KEY (f_no) REFERENCES family(f_no),
-  FOREIGN KEY (a_no) REFERENCES activities(a_no),
-  FOREIGN KEY (eid) REFERENCES employee(eid)
-);
+DELETE FROM membership WHERE main_member='pra';
+DELETE FROM membership WHERE main_member='29';
