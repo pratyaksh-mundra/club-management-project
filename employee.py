@@ -4,6 +4,7 @@ from PIL import ImageTk, Image
 from tkinter import messagebox
 import sqlite3
 import csv
+import sys
 import datetime
 from tkinter import ttk
 import tkinter as tk
@@ -21,7 +22,7 @@ def write_to_csv_attend(records):
 def insert_attendance():
     con = sqlite3.connect("identifier.sqlite")
     mycur = con.cursor()
-
+    formatted_date = now.strftime('%Y-%m-%d %H:%M:%S')
     mycur.execute("insert into membership values (:mem_no,:mem_type,:main_member,:exp_Date,:address)",
                   {
                       'date': now.strftime('%Y-%m-%d %H:%M:%S'),
