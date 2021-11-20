@@ -1,17 +1,23 @@
+# region import files
 from tkinter import *
 from PIL import ImageTk, Image
 from tkinter import messagebox
 import sqlite3
+import csv
 from tkinter import ttk
-
 import tkinter as tk
+# endregion
 
 manager = Tk()
 con = sqlite3.connect("identifier.sqlite")
-manager.configure(bg='yellow')
+manager.configure(bg='#EDDFEF')
 manager.title("manager view")
 manager.geometry("1600x900")
 
+def write_to_csv(records):
+    with open('membership.csv','a') as f:
+        w=csv.writer(f, dialect='excel')
+        w.writerow(records)
 
 def insert():
     con = sqlite3.connect("identifier.sqlite")
@@ -34,26 +40,29 @@ def insert():
     main_member.delete(0, END)
     exp_Date.delete(0, END)
     address.delete(0, END)
+
 def insert_employee():
     con = sqlite3.connect("identifier.sqlite")
     mycur = con.cursor()
 
 
-    mycur.execute("insert into employee values (:designation,:salary,:mid,:name)",
+    mycur.execute("insert into employee values (:eid,:designation,:salary,:mid,:name)",
                       {
-
-                          'designation': exp_Date_field.get(),
-                          'salary': address_field.get(),
-                          'mid': address_field.get(),
-                          'name': address_field.get()
+                          'eid': None,
+                          'designation': designation_field.get(),
+                          'salary': salary_field.get(),
+                          'mid': mid_field.get(),
+                          'name': name_field.get()
                       })
     con.commit()
     messagebox.showinfo("successful!, " "inserted")
     mycur.close()
-    designation.delete(0, END)
-    salary.delete(0, END)
-    mid.delete(0, END)
-def display():
+    designation_field.delete(0, END)
+    salary_field.delete(0, END)
+    mid_field.delete(0, END)
+    name_field.delete(0, END)
+
+def display_membership():
 
     display_mem=Toplevel(manager)
     display_mem.title("display")
@@ -69,10 +78,49 @@ def display():
         print_records += str(record)+ "\n"
     query_label=Label(display_mem,text=print_records)
     query_label.grid(row=1,column=0,columnspan=2)
+    export_btn=Button(display_mem, text="export to CSV",command=lambda: write_to_csv(records))
+    export_btn.grid(row=200,column=0)
     curr.close()
 
+def delete_membership():
+    mem_id=mem_no_field.get()
+    cur2=con.cursor()
+    cur2.execute("delete from membership where mem_no="+str(mem_id))
+    con.commit()
+    messagebox.showinfo("successful!,  deleted")
+    cur2.close()
 
-top = Label(manager, text="NEW MEMBERS", bg="red", font="verdana 30 bold").grid(row=0, column=1)
+def display_employee():
+    display_emp = Toplevel(manager)
+    display_emp.title("display")
+    lab = Label(display_emp, text="eid|designation|salary|mid|name")
+    lab.grid(row=0, column=0)
+    con = sqlite3.connect("identifier.sqlite")
+    curr = con.cursor()
+    curr.execute("select * from employee")
+    records = curr.fetchall()
+    # print(records)
+    print_records = ''
+    for record in records:
+        print_records += str(record) + "\n"
+    query_label = Label(display_emp, text=print_records)
+    query_label.grid(row=1, column=0, columnspan=2)
+    curr.close()
+
+def delete_employee():
+    emp_id = emp_id_field.get()
+    cur2 = con.cursor()
+    cur2.execute("delete from employee where eid=" + str(emp_id))
+    con.commit()
+    messagebox.showinfo("successful!,  deleted")
+    cur2.close()
+    emp_id_field.delete(0, END)
+
+
+
+
+# region membership table querying and buttons
+top = Label(manager, text="NEW MEMBERS", fg="white",bg="#94958B", font="verdana 30 bold").grid(row=0, column=1)
 mem_no = Label(manager, text="ID:")
 mem_type = Label(manager, text="MEM TYPE:")
 main_member = Label(manager, text="NAME:")
@@ -101,13 +149,17 @@ exp_Date_field.grid(row=4, column=1, ipadx="100")
 address_field.grid(row=5, column=1, ipadx="100")
 
 
-b1 = Button(manager, text="INSERT", font="30", fg="red", bg="blue", width="20", command=insert).grid(row=9, column=1)
-b2=Button(manager,text="DISPLAY",font="30",fg="red",bg="blue",width="20",command=display).grid(row=10,column=1)
-#b3=Button(manager,text="DELETE",font="30",fg="red",bg="blue",command=delete).grid(row=11,column=2)
+b1 = Button(manager, text="INSERT", font="30", fg="white", bg="#464655", width="20", command=insert).grid(row=9, column=1)
+b2=Button(manager,text="DISPLAY",font="30",fg="white", bg="#464655",width="20",command=display_membership).grid(row=10,column=1)
+b3=Button(manager,text="DELETE",font="30",fg="white", bg="#464655",width="20", command=delete_membership).grid(row=11,column=1)
+empty=Label(manager,bg="#EDDFEF").grid(row=12,column=0)
+# endregion
 
-#employee
+# region employee part, querying and buttons
 
-top1 = Label(manager, text="EMPLOYEE", bg="red", font="verdana 30 bold").grid(row=11, column=1)
+
+
+top1 = Label(manager, text="EMPLOYEE",fg="white", bg="#94958B", font="verdana 30 bold").grid(row=13, column=1)
 designation = Label(manager, text="DESIGNATION:")
 salary = Label(manager, text="SALARY:")
 mid = Label(manager, text="MID:")
@@ -115,10 +167,10 @@ name = Label(manager, text="NAME:")
 
 
 #grid formating
-designation.grid(row=12, column=0)
-salary.grid(row=13, column=0)
-mid.grid(row=14, column=0)
-name.grid(row=15, column=0)
+designation.grid(row=14, column=0)
+salary.grid(row=15, column=0)
+mid.grid(row=16, column=0)
+name.grid(row=17, column=0)
 
 
 
@@ -129,10 +181,21 @@ name_field = Entry(manager)
 
 
 #grid formating
-designation_field.grid(row=12, column=1, ipadx="100")
-salary_field.grid(row=13, column=1, ipadx="100")
-mid_field.grid(row=14, column=1, ipadx="100")
-name_field.grid(row=15, column=1, ipadx="100")
+designation_field.grid(row=14, column=1, ipadx="100")
+salary_field.grid(row=15, column=1, ipadx="100")
+mid_field.grid(row=16, column=1, ipadx="100")
+name_field.grid(row=17, column=1,ipadx="100" )
 
+#buttons
+
+b1 = Button(manager, text="INSERT", font="30", fg="white", bg="#464655", width="20", command=insert_employee).grid(row=18, column=1)
+b2=Button(manager,text="DISPLAY",font="30",fg="white", bg="#464655",width="20",command=display_employee).grid(row=19,column=1)
+empty=Label(manager,bg="#EDDFEF").grid(row=20,column=0)
+#stuff for delete button since eid is auto increment
+emp_id = Label(manager, text="DELETE EMPLOYEE:").grid(row=21, column=0)
+emp_id_field = Entry(manager)
+emp_id_field.grid(row=22,column=1,ipadx="100")
+b3 = Button(manager, text="DELETE", font="30", fg="white", bg="#464655",width="20", command=delete_employee).grid(row=23,column=1)
+# endregion
 
 manager.mainloop()
