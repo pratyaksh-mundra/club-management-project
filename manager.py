@@ -23,6 +23,10 @@ def write_to_csv_emp(records):
     with open('activities.csv','a') as f:
         w=csv.writer(f, dialect='excel')
         w.writerow(records)
+def write_to_csv_attend(records):
+    with open('activities.csv','a') as f:
+        w=csv.writer(f, dialect='excel')
+        w.writerow(records)
 def write_to_csv_act(records):
     with open('activities.csv','a') as f:
         w=csv.writer(f, dialect='excel')
@@ -251,7 +255,7 @@ def display_attendance():
         print_records += str(record) + "\n"
     query_label = Label(display_attend, text=print_records)
     query_label.grid(row=1, column=0, columnspan=2)
-    export_btn = Button(display_attend, text="export to CSV", command=lambda: write_to_csv_mp(records))
+    export_btn = Button(display_attend, text="export to CSV", command=lambda: write_to_csv_attend(records))
 
     export_btn.grid(row=200, column=0)
     curr.close()
