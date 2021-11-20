@@ -19,7 +19,7 @@ def write_to_csv(records):
         w=csv.writer(f, dialect='excel')
         w.writerow(records)
 
-def insert():
+def insert()
     con = sqlite3.connect("identifier.sqlite")
     mycur = con.cursor()
 
@@ -35,11 +35,11 @@ def insert():
     con.commit()
     messagebox.showinfo("successful!, " "inserted")
     mycur.close()
-    mem_no.delete(0, END)
-    mem_type.delete(0, END)
-    main_member.delete(0, END)
-    exp_Date.delete(0, END)
-    address.delete(0, END)
+    mem_no_field.delete(0, END)
+    mem_type_field.delete(0, END)
+    main_member_field.delete(0, END)
+    exp_Date_field.delete(0, END)
+    address_field.delete(0, END)
 
 def insert_employee():
     con = sqlite3.connect("identifier.sqlite")
@@ -116,7 +116,23 @@ def delete_employee():
     cur2.close()
     emp_id_field.delete(0, END)
 
+def insert_activities():
+    con = sqlite3.connect("identifier.sqlite")
+    mycur = con.cursor()
 
+    mycur.execute("insert into membership values (:a_no,:act_name,:cost)",
+                  {
+                      'a_no': None,
+                      'act_name': act_name_field.get(),
+                      'cost': cost_field.get()
+                  })
+    con.commit()
+    messagebox.showinfo("successful!, " "inserted")
+    mycur.close()
+    act_name_field.delete(0, END)
+    cost_field.delete(0, END)
+def display_activities():
+def delete_activities():
 
 
 # region membership table querying and buttons
@@ -197,5 +213,36 @@ emp_id_field = Entry(manager)
 emp_id_field.grid(row=22,column=1,ipadx="100")
 b3 = Button(manager, text="DELETE", font="30", fg="white", bg="#464655",width="20", command=delete_employee).grid(row=23,column=1)
 # endregion
+
+# region add or remove activities
+top = Label(manager, text="ADD/REMOVE ACTIVITIES", fg="white",bg="#94958B", font="verdana 30 bold").grid(row=0, column=6)
+act_name = Label(manager, text="ACTIVITY NAME:")
+cost = Label(manager, text="COST:")
+
+
+#grid formating
+act_name.grid(row=1, column=5)
+cost.grid(row=2, column=5)
+
+
+
+act_name_field = Entry(manager)
+cost_field = Entry(manager)
+
+
+#grid formating
+act_name_field.grid(row=1, column=6, ipadx="100")
+cost_field.grid(row=2, column=6, ipadx="100")
+
+
+
+b1 = Button(manager, text="INSERT", font="30", fg="white", bg="#464655", width="20", command=insert_activities).grid(row=3, column=6)
+b2=Button(manager,text="DISPLAY",font="30",fg="white", bg="#464655",width="20",command=display_activities).grid(row=4,column=6)
+b3=Button(manager,text="DELETE",font="30",fg="white", bg="#464655",width="20", command=delete_activities).grid(row=5,column=6)
+empty=Label(manager,bg="#EDDFEF").grid(row=12,column=6)
+# endregion
+
+
+
 
 manager.mainloop()
