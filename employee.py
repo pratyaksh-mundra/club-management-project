@@ -142,12 +142,30 @@ def display_mp():
     export_btn.grid(row=200,column=0)
     curr.close()
 def delete_mp():
+    con = sqlite3.connect("identifier.sqlite")
     pid1 = pid_field.get()
     cur2 = con.cursor()
     cur2.execute("delete from main_payments where pid="+str(pid1))
     con.commit()
     messagebox.showinfo("successful!,  deleted")
     cur2.close()
+def display_mp_pid():
+    display_main = Toplevel(employee)
+    display_main.title("display")
+    lab = Label(display_main, text="pid|mem_no|pay_date|name|amount|employee id|manager id")
+    lab.grid(row=0, column=0)
+    pid1 = pid_field.get()
+    con = sqlite3.connect("identifier.sqlite")
+    curr = con.cursor()
+    curr.execute("select * from main_payments where pid=" + str(pid1))
+    records = curr.fetchall()
+    # print(records)
+    print_records = ''
+    for record in records:
+        print_records += str(record) + "\n"
+        query_label = Label(display_main, text=print_records)
+        query_label.grid(row=1, column=0, columnspan=2)
+    curr.close()
 # endregion
 
 # region attendance portion
@@ -249,15 +267,21 @@ mid_field.grid(row=22, column=1, ipadx="100")
 
 
 b1 = Button(employee, text="INSERT", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=insert_mp).grid(row=23, column=1)
-b2=Button(employee,text="DISPLAY",font="30", fg="#EE6C4D", bg="#98c1d9",width="20",command=display_mp).grid(row=24,column=1)
+b2=Button(employee,text="DISPLAY ALL",font="30", fg="#EE6C4D", bg="#98c1d9",width="20",command=display_mp).grid(row=24,column=1)
 empty=Label(employee,text="",bg='#293241').grid(row=25,column=1)
 
 pid = Label(employee, text="DELETE PAYMENTS:",fg="#EE6C4D", bg="#98c1d9").grid(row=26, column=0)
 pid_field = Entry(employee,bg="#e0fbfc")
 pid_field.grid(row=26,column=1,ipadx="100")
 b3 = Button(employee, text="DELETE",font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=delete_mp).grid(row=27,column=1)
-empty=Label(employee, bg='#293241').grid(row=28, column=1)
 
+pid = Label(employee, text="PLEASE ENTER PID: ",fg="#EE6C4D", bg="#98c1d9")
+pid.grid(row=30, column=0)
+pid_field = Entry(employee,bg="#e0fbfc")
+pid_field.grid(row=30, column=1, ipadx="100")
+
+b4=Button(employee,text="DISPLAY",font="30", fg="#EE6C4D", bg="#98c1d9",width="20",command=display_mp_pid).grid(row=31,column=1)
+empty=Label(employee,text="",bg='#293241').grid(row=32,column=1)
 # endregion
 
 
