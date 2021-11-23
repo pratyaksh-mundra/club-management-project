@@ -348,7 +348,7 @@ def display_attendance():
 
 
 # region membership table querying and buttons
-top = Label(manager, text="NEW MEMBERS", fg="#E0FBFC", bg="#EE6C4D", font="verdana 16 bold").grid(row=0, column=1)
+top = Label(manager, text="NEW MEMBERS", fg="#E0FBFC", bg="#EE6C4D", font="verdana 12 bold").grid(row=0, column=1)
 
 mem_type = Label(manager, text="MEM TYPE:",fg="#EE6C4D", bg="#98c1d9")
 main_member = Label(manager, text="NAME:",fg="#EE6C4D", bg="#98c1d9")
@@ -374,9 +374,9 @@ main_member_field.grid(row=2, column=1, ipadx="100")
 exp_Date_field.grid(row=3, column=1, ipadx="100")
 address_field.grid(row=4, column=1, ipadx="100")
 
-b1 = Button(manager, text="INSERT", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=insert).grid(row=5,
+b1 = Button(manager, text="INSERT", fg="#EE6C4D", bg="#98c1d9",width="20", command=insert).grid(row=5,
                                                                                                           column=1)
-b2 = Button(manager, text="DISPLAY", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=display_membership).grid(
+b2 = Button(manager, text="DISPLAY", fg="#EE6C4D", bg="#98c1d9",width="20", command=display_membership).grid(
     row=6, column=1)
 # empty=Label(manager,bg="#EDDFEF").grid(row=7,column=0)
 mem_no = Label(manager, text="ID:")
@@ -384,7 +384,7 @@ mem_no.grid(row=8, column=0)
 mem_no_field = Entry(manager)
 mem_no_field.grid(row=8, column=1, ipadx="100")
 
-b3 = Button(manager, text="DELETE", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=delete_membership).grid(
+b3 = Button(manager, text="DELETE", fg="#EE6C4D", bg="#98c1d9",width="20", command=delete_membership).grid(
     row=9, column=1)
 empty = Label(manager, bg="#293241").grid(row=11, column=0)
 # endregion
@@ -392,7 +392,7 @@ empty = Label(manager, bg="#293241").grid(row=11, column=0)
 # region employee part, querying and buttons
 
 
-top1 = Label(manager, text="EMPLOYEE", fg="#E0FBFC", bg="#EE6C4D", font="verdana 16 bold").grid(row=12, column=1)
+top1 = Label(manager, text="EMPLOYEE", fg="#E0FBFC", bg="#EE6C4D", font="verdana 12 bold").grid(row=12, column=1)
 designation = Label(manager, text="DESIGNATION:",fg="#EE6C4D", bg="#98c1d9")
 salary = Label(manager, text="SALARY:",fg="#EE6C4D", bg="#98c1d9")
 mid = Label(manager, text="MID:",fg="#EE6C4D", bg="#98c1d9")
@@ -417,21 +417,21 @@ name_field.grid(row=16, column=1, ipadx="100")
 
 # buttons
 
-b1 = Button(manager, text="INSERT", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=insert_employee).grid(
+b1 = Button(manager, text="INSERT", fg="#EE6C4D", bg="#98c1d9",width="20", command=insert_employee).grid(
     row=17, column=1)
-b2 = Button(manager, text="DISPLAY", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=display_employee).grid(
+b2 = Button(manager, text="DISPLAY", fg="#EE6C4D", bg="#98c1d9",width="20", command=display_employee).grid(
     row=18, column=1)
 empty = Label(manager, bg="#293241").grid(row=19, column=0)
 # stuff for delete button since eid is auto increment
 emp_id = Label(manager, text="DELETE EMPLOYEE:",fg="#EE6C4D", bg="#98c1d9").grid(row=20, column=0)
 emp_id_field = Entry(manager)
 emp_id_field.grid(row=20, column=1, ipadx="100")
-b3 = Button(manager, text="DELETE", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=delete_employee).grid(
+b3 = Button(manager, text="DELETE", fg="#EE6C4D", bg="#98c1d9",width="20", command=delete_employee).grid(
     row=21, column=1)
 # endregion
 
 # region add or remove activities
-top = Label(manager, text="ADD/REMOVE ACTIVITIES", fg="#E0FBFC", bg="#EE6C4D", font="verdana 16 bold").grid(row=0,
+top = Label(manager, text="ADD/REMOVE ACTIVITIES", fg="#E0FBFC", bg="#EE6C4D", font="verdana 12 bold").grid(row=0,
                                                                                                           column=6)
 act_name = Label(manager, text="ACTIVITY NAME:",fg="#EE6C4D", bg="#98c1d9")
 cost = Label(manager, text="COST:",fg="#EE6C4D", bg="#98c1d9")
@@ -447,22 +447,22 @@ cost_field = Entry(manager)
 act_name_field.grid(row=1, column=6, ipadx="100")
 cost_field.grid(row=2, column=6, ipadx="100")
 
-b1 = Button(manager, text="INSERT", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=insert_activities).grid(
-    row=3, column=6)
-b2 = Button(manager, text="DISPLAY", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=display_activities).grid(
+b1 = Button(manager, text="INSERT", fg="#EE6C4D", bg="#98c1d9",width='20', command=insert_activities).grid(
+    row=3, column=6,)
+b2 = Button(manager, text="DISPLAY", fg="#EE6C4D", bg="#98c1d9",width="20", command=display_activities).grid(
     row=4, column=6)
 
 act_no = Label(manager, text="DELETE ACTIVITIES:",fg="#EE6C4D", bg="#98c1d9").grid(row=5, column=5)
 act_no_field = Entry(manager)
 act_no_field.grid(row=5, column=6, ipadx="100")
-b3 = Button(manager, text="DELETE", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=delete_activities).grid(
+b3 = Button(manager, text="DELETE", fg="#EE6C4D", bg="#98c1d9",width="20", command=delete_activities).grid(
     row=6, column=6)
 empty = Label(manager, bg="#293241").grid(row=7, column=6)
 empty = Label(manager, bg="#293241").grid(row=7, column=6)
 # endregion
 
 # region add remove main_payments
-top = Label(manager, text="PAYMENTS", fg="#E0FBFC", bg="#EE6C4D", font="verdana 16 bold").grid(row=8, column=6)
+top = Label(manager, text="PAYMENTS", fg="#E0FBFC", bg="#EE6C4D", font="verdana 12 bold").grid(row=8, column=6)
 mem_no = Label(manager, text="MEMBER NO.: ",fg="#EE6C4D", bg="#98c1d9")
 pay_date = Label(manager, text="PAYMENT DATE: ",fg="#EE6C4D", bg="#98c1d9")
 name = Label(manager, text="NAME:",fg="#EE6C4D", bg="#98c1d9")
@@ -493,31 +493,31 @@ amount_field.grid(row=12, column=6, ipadx="100")
 eid_field.grid(row=13, column=6, ipadx="100")
 mid_field.grid(row=14, column=6, ipadx="100")
 
-b1 = Button(manager, text="INSERT", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=insert_mp).grid(row=16,
+b1 = Button(manager, text="INSERT", fg="#EE6C4D", bg="#98c1d9",width="20", command=insert_mp).grid(row=16,
                                                                                                              column=6)
-b2 = Button(manager, text="DISPLAY", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=display_mp).grid(row=17,
+b2 = Button(manager, text="DISPLAY", fg="#EE6C4D", bg="#98c1d9",width="20", command=display_mp).grid(row=17,
                                                                                                                column=6)
 
 pid = Label(manager, text="DELETE PAYMENTS:",fg="#EE6C4D", bg="#98c1d9").grid(row=18, column=5)
 pid_field = Entry(manager)
 pid_field.grid(row=18, column=6, ipadx="100")
-b3 = Button(manager, text="DELETE", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=delete_mp).grid(row=19,
+b3 = Button(manager, text="DELETE", fg="#EE6C4D", bg="#98c1d9",width="20", command=delete_mp).grid(row=19,
                                                                                                              column=6)
 empty = Label(manager, bg="#293241").grid(row=20, column=6)
 
 # endregion
 
 # region attendance section
-top = Label(manager, text="attendance", fg="#E0FBFC", bg="#EE6C4D", font="verdana 16 bold").grid(row=0, column=8)
+top = Label(manager, text="ATTENDANCE", fg="#E0FBFC", bg="#EE6C4D", font="verdana 12 bold").grid(row=0, column=8)
 date1 = Label(manager, text="ENTER DATE:",fg="#EE6C4D", bg="#98c1d9").grid(row=1, column=7)
 date1_field = Entry(manager)
 date1_field.grid(row=1, column=8, ipadx="50")
-b3 = Button(manager, text="DISPLAY", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=display_attendance).grid(
+b3 = Button(manager, text="DISPLAY", fg="#EE6C4D", bg="#98c1d9",width="20", command=display_attendance).grid(
     row=2, column=8)
 # endregion
 
 # region family part
-top = Label(manager, text="FAMILY", fg="#E0FBFC", bg="#EE6C4D", font="verdana 16 bold").grid(row=4, column=8)
+top = Label(manager, text="FAMILY", fg="#E0FBFC", bg="#EE6C4D", font="verdana 12 bold").grid(row=4, column=8)
 mem_no = Label(manager, text="MEM NUMBER: ",fg="#EE6C4D", bg="#98c1d9")
 name = Label(manager, text="NAME: ",fg="#EE6C4D", bg="#98c1d9")
 birthday = Label(manager, text="BIRTHDAY:",fg="#EE6C4D", bg="#98c1d9")
@@ -542,20 +542,20 @@ birthday_field.grid(row=7, column=8, ipadx="100")
 anniversaries_field.grid(row=8, column=8, ipadx="100")
 
 
-b1 = Button(manager, text="INSERT", font="30", fg="#EE6C4D", bg="#98c1d9", width="20", command=insert_fam).grid(row=9,column=8)
+b1 = Button(manager, text="INSERT", fg="#EE6C4D", bg="#98c1d9", width="20", command=insert_fam).grid(row=9,column=8)
 mem_no_dis = Label(manager, text="ENTER MEM NO :",fg="#EE6C4D", bg="#98c1d9")
 mem_no_dis.grid(row=10, column=7 )
 mem_no_dis_field = Entry(manager)
 mem_no_dis_field.grid(row=10, column=8, ipadx="50")
 
-b2 = Button(manager, text="DISPLAY", font="30", fg="#EE6C4D", bg="#98c1d9", width="20", command=display_fam).grid(row=11,column=8)
+b2 = Button(manager, text="DISPLAY", fg="#EE6C4D", bg="#98c1d9", width="20", command=display_fam).grid(row=11,column=8)
 
 fam = Label(manager, text="DELETE FAMILY(MEM NO):",fg="#EE6C4D", bg="#98c1d9").grid(row=12, column=7)
 fam_field = Entry(manager)
 fam_field.grid(row=12, column=8, ipadx="50")
-b3 = Button(manager, text="DELETE", font="30", fg="#EE6C4D", bg="#98c1d9", width="20", command=delete_fam).grid(row=13,column=8)
+b3 = Button(manager, text="DELETE", fg="#EE6C4D", bg="#98c1d9", width="20", command=delete_fam).grid(row=13,column=8)
 empty = Label(manager, bg="#293241").grid(row=20, column=8)
 # endregion
 
-b3 = Button(manager, text="login setup", font="30", fg="#EE6C4D", bg="#98c1d9", width="20", command=run_loginsetup).grid(row=30,column=9)
+b3 = Button(manager, text="login setup", fg="#EE6C4D", bg="#98c1d9", width="20", command=run_loginsetup).grid(row=30,column=9)
 manager.mainloop()
