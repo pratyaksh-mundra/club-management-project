@@ -63,16 +63,16 @@ def delete_manager():
 
 # endregion
 
-# region membership functions
+# region employee functions
 def insert_employee():
     con = sqlite3.connect("identifier.sqlite")
     mycur = con.cursor()
 
-    mycur.execute("insert into manager_login values (:mcred_id,:m_username,:m_password)",
+    mycur.execute("insert into employee_login values (:ecred_id,:e_username,:e_password)",
                   {
-                      'mcred_id': None,
-                      'm_username': username_field.get(),
-                      'm_password': password_field.get()
+                      'ecred_id': None,
+                      'e_username': username_field.get(),
+                      'e_password': password_field.get()
                   })
     con.commit()
     messagebox.showinfo("successful!, " "inserted")
@@ -85,11 +85,11 @@ def insert_employee():
 def display_employee():
     display_mem = Toplevel(login_setup)
     display_mem.title("display")
-    lab = Label(display_mem, text="mem_no|mem_type|main_member|exp_date|address")
+    lab = Label(display_mem, text="ecred_id|e_username|e_password")
     lab.grid(row=0, column=0)
     con = sqlite3.connect("identifier.sqlite")
     curr = con.cursor()
-    curr.execute("select * from membership")
+    curr.execute("select * from employee_login")
     records = curr.fetchall()
     # print(records)
     print_records = ''
@@ -102,9 +102,9 @@ def display_employee():
 
 
 def delete_employee():
-    mem_id = mcred_id_field.get()
+    ecred_id_s = ecred_id_field.get()
     cur2 = con.cursor()
-    cur2.execute("delete from membership where mem_no=" + str(mem_id))
+    cur2.execute("delete from employee_login where ecred_id=" + str(ecred_id_s))
     con.commit()
     messagebox.showinfo("successful!,  deleted")
     cur2.close()
@@ -149,7 +149,7 @@ b3 = Button(login_setup, text="DELETE CREDENTIALS", font="30", fg="#EE6C4D", bg=
 empty = Label(login_setup, bg="#293241").grid(row=7, column=0)
 # endregion
 
-# region MANAGER CREDS
+# region EMPLOYEE CREDS
 top = Label(login_setup, text="EMPLOYEE LOGIN", fg="#E0FBFC", bg="#EE6C4D", font="verdana 16 bold").grid(row=8, column=1)
 
 e_username = Label(login_setup, text="USERNAME:",fg="#EE6C4D", bg="#98c1d9")
@@ -158,30 +158,30 @@ e_password = Label(login_setup, text="PASSWORD:",fg="#EE6C4D", bg="#98c1d9")
 
 # grid formating
 
-username.grid(row=1, column=0)
-password.grid(row=2, column=0)
+e_username.grid(row=1, column=0)
+e_password.grid(row=2, column=0)
 
-username_field = Entry(login_setup)
-password_field = Entry(login_setup)
+e_username_field = Entry(login_setup)
+e_password_field = Entry(login_setup)
 
 
 # grid formating
 
-username_field.grid(row=1, column=1, ipadx="100")
-password_field.grid(row=2, column=1, ipadx="100")
+e_username_field.grid(row=1, column=1, ipadx="100")
+e_password_field.grid(row=2, column=1, ipadx="100")
 
 
-b1 = Button(login_setup, text="INSERT CREDENTIALS", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=insert).grid(row=3,
+b1 = Button(login_setup, text="INSERT CREDENTIALS", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=insert_employee).grid(row=3,
                                                                                                           column=1)
-b2 = Button(login_setup, text="DISPLAY CREDENTIALS", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=display_manager).grid(
+b2 = Button(login_setup, text="DISPLAY CREDENTIALS", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=display_employee).grid(
     row=4, column=1)
 # empty=Label(manager,bg="#EDDFEF").grid(row=7,column=0)
-mcred_id = Label(login_setup, text="ID:")
-mcred_id.grid(row=5, column=0)
-mcred_id_field = Entry(login_setup)
-mcred_id_field.grid(row=5, column=1, ipadx="100")
+ecred_id = Label(login_setup, text="ID:")
+ecred_id.grid(row=5, column=0)
+ecred_id_field = Entry(login_setup)
+ecred_id_field.grid(row=5, column=1, ipadx="100")
 
-b3 = Button(login_setup, text="DELETE CREDENTIALS", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=delete_manager).grid(
+b3 = Button(login_setup, text="DELETE CREDENTIALS", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=delete_employee).grid(
     row=6, column=1)
 empty = Label(login_setup, bg="#293241").grid(row=7, column=0)
 # endregion
