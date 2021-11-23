@@ -21,7 +21,7 @@ def login():
       #open database
       conn = sqlite3.connect('identifier.sqlite')
       #select query
-      cursor = conn.execute('SELECT * from manager where username="%s" and password="%s"'%(uname,pwd))
+      cursor = conn.execute('SELECT * from manager where e_username="%s" and e_password="%s"'%(uname,pwd))
       #fetch data
       if cursor.fetchone():
        message.set("Login success")
