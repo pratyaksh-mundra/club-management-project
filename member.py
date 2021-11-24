@@ -10,9 +10,11 @@ import tkinter as tk
 
 member = Tk()
 con = sqlite3.connect("identifier.sqlite")
-member.configure(bg='#293241')
+member.configure()
 member.title("member view")
-member.geometry("1600x900")
+member.geometry("600x400")
+member.tk.call("source", "azure.tcl")
+member.tk.call("set_theme", "dark")
 
 def display_activities():
     display_act = Toplevel(member)
@@ -69,29 +71,29 @@ def display_fam():
     curr.close()
 
 # region activities
-top = Label(member, text="VIEW ACTIVITIES", fg="#E0FBFC", bg="#EE6C4D", font="verdana 12 bold").grid(row=13, column=1)
-b2=Button(member,text="DISPLAY",font="30", fg="#EE6C4D", bg="#98c1d9",width="20",command=display_activities).grid(row=14,column=1)
-empty=Label(member,text="",bg='#293241').grid(row=15,column=1)
+top = Label(member, text="VIEW ACTIVITIES").grid(row=13, column=1)
+b2=ttk.Button(member,text="DISPLAY",width="20",command=display_activities).grid(row=14,column=1)
+empty=Label(member,text="",).grid(row=15,column=1)
 # endregion
 
 
 
 # region PAYMENTS
-top = Label(member, text="PAYMENTS", fg="#E0FBFC", bg="#EE6C4D", font="verdana 12 bold").grid(row=16, column=1)
-pid = Label(member, text="PLEASE ENTER PID: ",fg="#EE6C4D", bg="#98c1d9")
+top = Label(member, text="PAYMENTS").grid(row=16, column=1)
+pid = Label(member, text="PLEASE ENTER PID: ")
 pid.grid(row=17, column=0)
-pid_field = Entry(member,bg="#e0fbfc")
+pid_field = Entry(member)
 pid_field.grid(row=17, column=1, ipadx="100")
 
-b2=Button(member,text="DISPLAY",font="30", fg="#EE6C4D", bg="#98c1d9",width="20",command=display_mp).grid(row=24,column=1)
-empty=Label(member,text="",bg='#293241').grid(row=25,column=1)
+b2=ttk.Button(member,text="DISPLAY",width="20",command=display_mp).grid(row=24,column=1)
+empty=Label(member,text="",).grid(row=25,column=1)
 # endregion
 
-top = Label(member, text="FAMILY", fg="#E0FBFC", bg="#EE6C4D", font="verdana 12 bold").grid(row=26, column=1)
-mem_no_dis = Label(member, text="ENTER MEM NO :",fg="#EE6C4D", bg="#98c1d9")
+top = Label(member, text="FAMILY").grid(row=26, column=1)
+mem_no_dis = Label(member, text="ENTER MEM NO :")
 mem_no_dis.grid(row=27, column=0 )
-mem_no_dis_field = Entry(member,bg="#e0fbfc")
+mem_no_dis_field = Entry(member)
 mem_no_dis_field.grid(row=27, column=1, ipadx="100")
 
-b2 = Button(member, text="DISPLAY", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=display_fam).grid(row=28,column=1)
+b2 = ttk.Button(member, text="DISPLAY",width="20", command=display_fam).grid(row=28,column=1)
 member.mainloop()

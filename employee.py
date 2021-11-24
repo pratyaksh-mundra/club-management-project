@@ -12,9 +12,11 @@ import tkinter as tk
 
 employee = Tk()
 con = sqlite3.connect("identifier.sqlite")
-employee.configure(bg='#293241')
+employee.configure
 employee.title("employee view")
 employee.geometry("1600x900")
+employee.tk.call("source", "azure.tcl")
+employee.tk.call("set_theme", "dark")
 def time_so():
     a = datetime.datetime.now()
     return a
@@ -71,7 +73,7 @@ def display_attendance():
         print_records += str(record) + "\n"
     query_label = Label(display_attend, text=print_records)
     query_label.grid(row=1, column=0, columnspan=2)
-    export_btn = Button(display_attend, text="export to CSV", command=lambda: write_to_csv_attend(records))
+    export_btn = ttk.Button(display_attend, text="export to CSV", command=lambda: write_to_csv_attend(records))
 
     export_btn.grid(row=200, column=0)
     curr.close()
@@ -91,7 +93,7 @@ def display_activities():
         print_records += str(record) + "\n"
     query_label = Label(display_act, text=print_records)
     query_label.grid(row=1, column=0, columnspan=2)
-    export_btn = Button(display_act, text="export to CSV", command=lambda: write_to_csv_act(records))
+    export_btn = ttk.Button(display_act, text="export to CSV", command=lambda: write_to_csv_act(records))
     export_btn.grid(row=200, column=0)
     curr.close()
 # region main_payments functions
@@ -136,7 +138,7 @@ def display_mp():
         print_records += str(record)+ "\n"
     query_label = Label(display_main,text=print_records)
     query_label.grid(row=1,column=0,columnspan=2)
-    export_btn = Button(display_main, text="export to CSV",command=lambda: write_to_csv_mp(records))
+    export_btn = ttk.Button(display_main, text="export to CSV",command=lambda: write_to_csv_mp(records))
 
 
     export_btn.grid(row=200,column=0)
@@ -169,14 +171,14 @@ def display_mp_pid():
 # endregion
 
 # region attendance portion
-top = Label(employee, text="ATTENDANCE", fg="#E0FBFC",bg="#EE6C4D", font="verdana 24 bold").grid(row=0, column=1)
-#date = Label(employee, text="DATE:", fg="#EE6C4D", bg="#98c1d9")
-mem_no = Label(employee, text="MEM_NO:" , fg="#EE6C4D", bg="#98c1d9")
-act_name = Label(employee, text="ACTIVITY NAME:" , fg="#EE6C4D", bg="#98c1d9")
-name = Label(employee, text="NAME:", fg="#EE6C4D", bg="#98c1d9")
-f_no = Label(employee, text="F_NO.:", fg="#EE6C4D", bg="#98c1d9")
-a_no = Label(employee, text="ACTIVITY NO:", fg="#EE6C4D", bg="#98c1d9")
-eid = Label(employee, text="EMPLOYEE ID:", fg="#EE6C4D", bg="#98c1d9")
+top = Label(employee, text="ATTENDANCE").grid(row=0, column=1)
+#date = Label(employee, text="DATE:",)
+mem_no = Label(employee, text="MEM_NO:" ,)
+act_name = Label(employee, text="ACTIVITY NAME:" ,)
+name = Label(employee, text="NAME:",)
+f_no = Label(employee, text="F_NO.:",)
+a_no = Label(employee, text="ACTIVITY NO:",)
+eid = Label(employee, text="EMPLOYEE ID:",)
 
 
 #date.grid(row=1, column=0)
@@ -188,13 +190,13 @@ a_no.grid(row=6, column=0)
 eid.grid(row=7, column=0)
 
 
-#date_field = Entry(employee,bg="#e0fbfc")
-mem_no_field = Entry(employee,bg="#e0fbfc")
-act_name_field = Entry(employee,bg="#e0fbfc")
-name_field = Entry(employee,bg="#e0fbfc")
-f_no_field = Entry(employee,bg="#e0fbfc")
-a_no_field = Entry(employee,bg="#e0fbfc")
-eid_field = Entry(employee,bg="#e0fbfc")
+#date_field = Entry(employee)
+mem_no_field = Entry(employee)
+act_name_field = Entry(employee)
+name_field = Entry(employee)
+f_no_field = Entry(employee)
+a_no_field = Entry(employee)
+eid_field = Entry(employee)
 
 #date_field.grid(row=1, column=1, ipadx="100",)
 mem_no_field.grid(row=2, column=1, ipadx="100")
@@ -204,37 +206,37 @@ f_no_field.grid(row=5, column=1, ipadx="100")
 a_no_field.grid(row=6, column=1, ipadx="100")
 eid_field.grid(row=7, column=1, ipadx="100")
 
-b1 = Button(employee, text="INSERT", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=insert_attendance).grid(row=8, column=1)
+b1 = ttk.Button(employee, text="INSERT",  command=insert_attendance).grid(row=8, column=1)
 # endregion
 
 
 
 # region attendance section search
-top = Label(employee, text="attendance", fg="#E0FBFC",bg="#EE6C4D", font="verdana 12 bold").grid(row=9, column=1)
-date1 = Label(employee, text="ENTER DATE:",fg="#EE6C4D", bg="#98c1d9").grid(row=10, column=0)
-date1_field = Entry(employee,bg="#e0fbfc")
+top = Label(employee, text="attendance").grid(row=9, column=1)
+date1 = Label(employee, text="ENTER DATE:").grid(row=10, column=0)
+date1_field = Entry(employee)
 date1_field.grid(row=10,column=1,ipadx="100")
-b3 = Button(employee, text="DISPLAY", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=display_attendance).grid(row=11,column=1)
-empty=Label(employee,text="",bg='#293241').grid(row=12,column=1)
+b3 = ttk.Button(employee, text="DISPLAY",  command=display_attendance).grid(row=11,column=1)
+empty=Label(employee,text="").grid(row=12,column=1)
 # endregion
 
 # region display activities
-top = Label(employee, text="VIEW ACTIVITIES", fg="#E0FBFC", bg="#EE6C4D", font="verdana 12 bold").grid(row=13, column=1)
-b2=Button(employee,text="DISPLAY",font="30", fg="#EE6C4D", bg="#98c1d9",width="20",command=display_activities).grid(row=14,column=1)
-empty=Label(employee,text="",bg='#293241').grid(row=15,column=1)
+top = Label(employee, text="VIEW ACTIVITIES").grid(row=13, column=1)
+b2=ttk.Button(employee,text="DISPLAY",command=display_activities).grid(row=14,column=1)
+empty=Label(employee,text="").grid(row=15,column=1)
 
 
 
 # endregion
 
 # region add remove main_payments
-top = Label(employee, text="PAYMENTS", fg="#E0FBFC", bg="#EE6C4D", font="verdana 12 bold").grid(row=16, column=1)
-mem_no = Label(employee, text="MEMBER NO.: ",fg="#EE6C4D", bg="#98c1d9")
-pay_date = Label(employee, text="PAYMENT DATE: ",fg="#EE6C4D", bg="#98c1d9")
-name = Label(employee, text="NAME:",fg="#EE6C4D", bg="#98c1d9")
-amount = Label(employee, text="AMOUNT:",fg="#EE6C4D", bg="#98c1d9")
-eid = Label(employee, text="EMPLOYEE ID:",fg="#EE6C4D", bg="#98c1d9")
-mid = Label(employee, text="MANAGER_ID:",fg="#EE6C4D", bg="#98c1d9")
+top = Label(employee, text="PAYMENTS").grid(row=16, column=1)
+mem_no = Label(employee, text="MEMBER NO.: ")
+pay_date = Label(employee, text="PAYMENT DATE: ")
+name = Label(employee, text="NAME:")
+amount = Label(employee, text="AMOUNT:")
+eid = Label(employee, text="EMPLOYEE ID:")
+mid = Label(employee, text="MANAGER_ID:")
 
 
 #grid formating
@@ -247,12 +249,12 @@ mid.grid(row=22, column=0)
 
 
 
-mem_no_field = Entry(employee,bg="#e0fbfc")
-pay_date_field = Entry(employee,bg="#e0fbfc")
-name_field = Entry(employee,bg="#e0fbfc")
-amount_field = Entry(employee,bg="#e0fbfc")
-eid_field = Entry(employee,bg="#e0fbfc")
-mid_field = Entry(employee,bg="#e0fbfc")
+mem_no_field = Entry(employee)
+pay_date_field = Entry(employee)
+name_field = Entry(employee)
+amount_field = Entry(employee)
+eid_field = Entry(employee)
+mid_field = Entry(employee)
 
 
 #grid formating
@@ -266,22 +268,22 @@ mid_field.grid(row=22, column=1, ipadx="100")
 
 
 
-b1 = Button(employee, text="INSERT", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=insert_mp).grid(row=23, column=1)
-b2=Button(employee,text="DISPLAY ALL",font="30", fg="#EE6C4D", bg="#98c1d9",width="20",command=display_mp).grid(row=24,column=1)
-empty=Label(employee,text="",bg='#293241').grid(row=25,column=1)
+b1 = ttk.Button(employee, text="INSERT",  command=insert_mp).grid(row=23, column=1)
+b2=ttk.Button(employee,text="DISPLAY ALL",command=display_mp).grid(row=24,column=1)
+empty=Label(employee,text="").grid(row=25,column=1)
 
-pid = Label(employee, text="DELETE PAYMENTS:",fg="#EE6C4D", bg="#98c1d9").grid(row=26, column=0)
-pid_field = Entry(employee,bg="#e0fbfc")
+pid = Label(employee, text="DELETE PAYMENTS:").grid(row=26, column=0)
+pid_field = Entry(employee)
 pid_field.grid(row=26,column=1,ipadx="100")
-b3 = Button(employee, text="DELETE",font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=delete_mp).grid(row=27,column=1)
+b3 = ttk.Button(employee, text="DELETE", command=delete_mp).grid(row=27,column=1)
 
-pid = Label(employee, text="PLEASE ENTER PID: ",fg="#EE6C4D", bg="#98c1d9")
+pid = Label(employee, text="PLEASE ENTER PID: ")
 pid.grid(row=30, column=0)
-pid_field = Entry(employee,bg="#e0fbfc")
+pid_field = Entry(employee)
 pid_field.grid(row=30, column=1, ipadx="100")
 
-b4=Button(employee,text="DISPLAY",font="30", fg="#EE6C4D", bg="#98c1d9",width="20",command=display_mp_pid).grid(row=31,column=1)
-empty=Label(employee,text="",bg='#293241').grid(row=32,column=1)
+b4=ttk.Button(employee,text="DISPLAY",command=display_mp_pid).grid(row=31,column=1)
+empty=Label(employee,text="").grid(row=32,column=1)
 # endregion
 
 

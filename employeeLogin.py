@@ -32,11 +32,13 @@ def login():
 def Loginform():
     global login_screen
     login_screen = Tk()
+    login_screen.tk.call("source", "azure.tcl")
+    login_screen.tk.call("set_theme", "dark")
     #Setting title of screen
-    login_screen.title("employee login")
+    login_screen.title("EMPLOYEE login")
     #setting height and width of screen
     login_screen.geometry("350x250")
-    login_screen.configure(bg='#293241')
+    login_screen.configure()
     #declaring variable
     global  message;
     global username
@@ -45,19 +47,19 @@ def Loginform():
     password = StringVar()
     message=StringVar()
     #Creating layout of login form
-    Label(login_screen,width="300", text="Login From", fg="#E0FBFC", bg="#EE6C4D",font=("Arial",12,"bold")).pack()
+    Label(login_screen,width="300", text="EMPLOYEE LOGIN FORM").pack()
     #Username Label
-    Label(login_screen, text="Username * ",fg="#EE6C4D", bg="#98c1d9",font=("Arial",12,"bold")).place(x=20,y=40)
+    Label(login_screen, text="Username * ").place(x=20,y=40)
     #Username textbox
-    Entry(login_screen, textvariable=username,bg="#1C2833",fg="white",font=("Arial",12,"bold")).place(x=120,y=42)
+    Entry(login_screen, textvariable=username).place(x=120,y=42)
     #Password Label
-    Label(login_screen, text="Password * ",fg="#EE6C4D", bg="#98c1d9",font=("Arial",12,"bold")).place(x=20,y=80)
+    Label(login_screen, text="Password * ").place(x=20,y=80)
     #Password textbox
-    Entry(login_screen, textvariable=password ,show="*",bg="#1C2833",fg="white",font=("Arial",12,"bold")).place(x=120,y=82)
+    Entry(login_screen, textvariable=password ,show="*").place(x=120,y=82)
     #Label for displaying login status[success/failed]
-    Label(login_screen, text="",textvariable=message,bg="#293241",fg="white",font=("Arial",12,"bold")).place(x=95,y=120)
+    Label(login_screen, text="",textvariable=message).place(x=95,y=120)
     #Login button
-    Button(login_screen, text="Login", width=10, height=1, command=login, fg="#EE6C4D", bg="#98c1d9",font=("Arial",12,"bold")).place(x=125,y=170)
+    ttk.Button(login_screen, text="Login",  command=login).place(x=125,y=170)
     login_screen.mainloop()
 
 Loginform()

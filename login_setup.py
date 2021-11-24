@@ -9,7 +9,9 @@ import  os
 
 login_setup = Tk()
 con = sqlite3.connect("identifier.sqlite")
-login_setup.configure(bg='#293241')
+login_setup.configure()
+login_setup.tk.call("source", "azure.tcl")
+login_setup.tk.call("set_theme", "dark")
 login_setup.title("login setup")
 login_setup.geometry("1600x900")
 
@@ -162,10 +164,10 @@ def delete_member():
 # endregion
 
 # region MANAGER CREDS
-top = Label(login_setup, text="MANAGER LOGIN", fg="#E0FBFC", bg="#EE6C4D", font="verdana 16 bold").grid(row=0, column=1)
+top = Label(login_setup, text="MANAGER LOGIN").grid(row=0, column=1)
 
-username = Label(login_setup, text="USERNAME:",fg="#EE6C4D", bg="#98c1d9")
-password = Label(login_setup, text="PASSWORD:",fg="#EE6C4D", bg="#98c1d9")
+username = Label(login_setup, text="USERNAME:")
+password = Label(login_setup, text="PASSWORD:")
 
 
 # grid formating
@@ -183,9 +185,9 @@ username_field.grid(row=1, column=1, ipadx="100")
 password_field.grid(row=2, column=1, ipadx="100")
 
 
-b1 = Button(login_setup, text="INSERT CREDENTIALS", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=insert).grid(row=3,
+b1 = ttk.Button(login_setup, text="INSERT CREDENTIALS", command=insert).grid(row=3,
                                                                                                           column=1)
-b2 = Button(login_setup, text="DISPLAY CREDENTIALS", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=display_manager).grid(
+b2 = ttk.Button(login_setup, text="DISPLAY CREDENTIALS", command=display_manager).grid(
     row=4, column=1)
 # empty=Label(manager,bg="#EDDFEF").grid(row=7,column=0)
 mcred_id = Label(login_setup, text="ID:")
@@ -193,16 +195,16 @@ mcred_id.grid(row=5, column=0)
 mcred_id_field = Entry(login_setup)
 mcred_id_field.grid(row=5, column=1, ipadx="100")
 
-b3 = Button(login_setup, text="DELETE CREDENTIALS", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=delete_manager).grid(
+b3 = ttk.Button(login_setup, text="DELETE CREDENTIALS", command=delete_manager).grid(
     row=6, column=1)
-empty = Label(login_setup, bg="#293241").grid(row=7, column=0)
+empty = Label(login_setup).grid(row=7, column=0)
 # endregion
 
 # region EMPLOYEE CREDS
-top = Label(login_setup, text="EMPLOYEE LOGIN", fg="#E0FBFC", bg="#EE6C4D", font="verdana 16 bold").grid(row=8, column=1)
+top = Label(login_setup, text="EMPLOYEE LOGIN").grid(row=8, column=1)
 
-e_username = Label(login_setup, text="USERNAME:",fg="#EE6C4D", bg="#98c1d9")
-e_password = Label(login_setup, text="PASSWORD:",fg="#EE6C4D", bg="#98c1d9")
+e_username = Label(login_setup, text="USERNAME:")
+e_password = Label(login_setup, text="PASSWORD:")
 
 
 # grid formating
@@ -220,9 +222,9 @@ e_username_field.grid(row=9, column=1, ipadx="100")
 e_password_field.grid(row=10, column=1, ipadx="100")
 
 
-b1 = Button(login_setup, text="INSERT CREDENTIALS", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=insert_employee).grid(row=11,
+b1 = ttk.Button(login_setup, text="INSERT CREDENTIALS", command=insert_employee).grid(row=11,
                                                                                                           column=1)
-b2 = Button(login_setup, text="DISPLAY CREDENTIALS", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=display_employee).grid(
+b2 = ttk.Button(login_setup, text="DISPLAY CREDENTIALS", command=display_employee).grid(
     row=12, column=1)
 # empty=Label(manager,bg="#EDDFEF").grid(row=7,column=0)
 ecred_id = Label(login_setup, text="ID:")
@@ -230,16 +232,16 @@ ecred_id.grid(row=13, column=0)
 ecred_id_field = Entry(login_setup)
 ecred_id_field.grid(row=13, column=1, ipadx="100")
 
-b3 = Button(login_setup, text="DELETE CREDENTIALS", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=delete_employee).grid(
+b3 = ttk.Button(login_setup, text="DELETE CREDENTIALS", command=delete_employee).grid(
     row=14, column=1)
-empty = Label(login_setup, bg="#293241").grid(row=15, column=0)
+empty = Label(login_setup).grid(row=15, column=0)
 # endregion
 
 # region member CREDS
-top = Label(login_setup, text="MEMBER LOGIN", fg="#E0FBFC", bg="#EE6C4D", font="verdana 16 bold").grid(row=16, column=1)
+top = Label(login_setup, text="MEMBER LOGIN").grid(row=16, column=1)
 
-mem_username = Label(login_setup, text="USERNAME:",fg="#EE6C4D", bg="#98c1d9")
-mem_password = Label(login_setup, text="PASSWORD:",fg="#EE6C4D", bg="#98c1d9")
+mem_username = Label(login_setup, text="USERNAME:")
+mem_password = Label(login_setup, text="PASSWORD:")
 
 
 # grid formating
@@ -257,9 +259,9 @@ mem_username_field.grid(row=17, column=1, ipadx="100")
 mem_password_field.grid(row=18, column=1, ipadx="100")
 
 
-b1 = Button(login_setup, text="INSERT CREDENTIALS", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=insert_member).grid(row=19,
+b1 = ttk.Button(login_setup, text="INSERT CREDENTIALS", command=insert_member).grid(row=19,
                                                                                                           column=1)
-b2 = Button(login_setup, text="DISPLAY CREDENTIALS", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=display_member).grid(
+b2 = ttk.Button(login_setup, text="DISPLAY CREDENTIALS", command=display_member).grid(
     row=20, column=1)
 # empty=Label(manager,bg="#EDDFEF").grid(row=7,column=0)
 memcred_id = Label(login_setup, text="ID:")
@@ -267,9 +269,9 @@ memcred_id.grid(row=21, column=0)
 memcred_id_field = Entry(login_setup)
 memcred_id_field.grid(row=21, column=1, ipadx="100")
 
-b3 = Button(login_setup, text="DELETE CREDENTIALS", font="30", fg="#EE6C4D", bg="#98c1d9",width="20", command=delete_member).grid(
+b3 = ttk.Button(login_setup, text="DELETE CREDENTIALS", command=delete_member).grid(
     row=22, column=1)
-empty = Label(login_setup, bg="#293241").grid(row=23, column=0)
+empty = Label(login_setup).grid(row=23, column=0)
 # endregion
 
 login_setup.mainloop()
