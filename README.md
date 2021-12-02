@@ -1,4 +1,4 @@
-# pyclub
+# club managment database project using python and tkinter
 CLUB MANAGMENT DATABASE
 tkinter project
 this is a project where i made a club database using sqlite3, tkinter and python.
