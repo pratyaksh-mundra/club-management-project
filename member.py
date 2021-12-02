@@ -15,6 +15,14 @@ member.title("member view")
 member.geometry("600x400")
 member.tk.call("source", "azure.tcl")
 member.tk.call("set_theme", "dark")
+def change_theme():
+    # NOTE: The theme's real name is azure-<mode>
+    if member.tk.call("ttk::style", "theme", "use") == "azure-light":
+        # Set light theme
+        member.tk.call("set_theme", "dark")
+    else:
+        # Set dark theme
+        member.tk.call("set_theme", "light")
 
 def display_activities():
     display_act = Toplevel(member)
@@ -96,4 +104,7 @@ mem_no_dis_field = Entry(member)
 mem_no_dis_field.grid(row=27, column=1, ipadx="100")
 
 b2 = ttk.Button(member, text="DISPLAY",width="20", command=display_fam).grid(row=28,column=1)
+# Remember, you have to use ttk widgets
+button = ttk.Button(member, text="Change theme!", command=change_theme)
+button.grid(row=31,column=1)
 member.mainloop()

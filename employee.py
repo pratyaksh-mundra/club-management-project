@@ -17,6 +17,16 @@ employee.title("employee view")
 employee.geometry("1600x900")
 employee.tk.call("source", "azure.tcl")
 employee.tk.call("set_theme", "dark")
+def change_theme():
+    # NOTE: The theme's real name is azure-<mode>
+    if employee.tk.call("ttk::style", "theme", "use") == "azure-light":
+        # Set light theme
+        employee.tk.call("set_theme", "dark")
+    else:
+        # Set dark theme
+        employee.tk.call("set_theme", "light")
+
+
 def time_so():
     a = datetime.datetime.now()
     return a
@@ -286,6 +296,8 @@ b4=ttk.Button(employee,text="DISPLAY",command=display_mp_pid).grid(row=31,column
 empty=Label(employee,text="").grid(row=32,column=1)
 # endregion
 
-
+# Remember, you have to use ttk widgets
+button = ttk.Button(employee, text="Change theme!", command=change_theme)
+button.grid(row=35,column=1)
 
 employee.mainloop()

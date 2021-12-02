@@ -14,7 +14,10 @@ import pandas as pd
 
 con = sqlite3.connect("identifier.sqlite")
 mycur = con.cursor()
-a=pd.read_sql('select eid,salary from employee',con)
+a=pd.read_sql("""SELECT act_name, COUNT(*)
+                 FROM attendance
+                 WHERE date=SYSDATE
+                 GROUP BY act_name;""",con)
 print(a)
 root= tk.Tk()
 figure = plt.Figure(figsize=(6,5), dpi=100)
