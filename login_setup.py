@@ -73,8 +73,8 @@ def insert_employee():
     mycur.execute("insert into employee_login values (:ecred_id,:e_username,:e_password)",
                   {
                       'ecred_id': None,
-                      'e_username': username_field.get(),
-                      'e_password': password_field.get()
+                      'e_username': e_username_field.get(),
+                      'e_password': e_password_field.get()
                   })
     con.commit()
     messagebox.showinfo("successful!, " "inserted")
@@ -119,7 +119,7 @@ def insert_member():
     con = sqlite3.connect("identifier.sqlite")
     mycur = con.cursor()
 
-    mycur.execute("insert into member_login values (:memcred_id,mem_username,:mem_password)",
+    mycur.execute("insert into member_login values (:memcred_id,:mem_username,:mem_password)",
                   {
                       'memcred_id': None,
                       'mem_username': mem_username_field.get(),

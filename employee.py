@@ -32,7 +32,7 @@ def time_so():
     return a
 
 def write_to_csv_attend(records):
-    with open('activities.csv','a') as f:
+    with open('attendance.csv','a') as f:
         w=csv.writer(f, dialect='excel')
         w.writerow(records)
 def write_to_csv_mp(records):
@@ -71,11 +71,15 @@ def display_attendance():
     display_attend = Toplevel(employee)
     display_attend.title("display")
     date1 = date1_field.get()
+    date2=date1#+" 12:00:00"
+    date3=date1#+" 23:59:00"
+    data_date=(date2, date3)
     lab = Label(display_attend, text="date|mem_no|act_name|name|f_no|a_no|eid")
     lab.grid(row=0, column=0)
     con = sqlite3.connect("identifier.sqlite")
     curr = con.cursor()
-    curr.execute("select * from attendance where date=" + str(date1))
+    q="select * from attendance where date between ? and ?"
+    curr.execute(q,data_date)
     records = curr.fetchall()
     # print(records)
     print_records = ''

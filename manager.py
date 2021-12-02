@@ -1,12 +1,16 @@
+import os
 from tkinter import *
-from PIL import ImageTk, Image
 from tkinter import messagebox
 import sqlite3
 import csv
+import sys
+import datetime
 from tkinter import ttk
 import tkinter as tk
-import  os
-
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from pandas import DataFrame
+import pandas as pd
 
 
 
@@ -334,11 +338,15 @@ def display_attendance():
     display_attend = Toplevel(manager)
     display_attend.title("display")
     date1 = date1_field.get()
+    date2=date1#+" 12:00:00"
+    date3=date1#+" 23:59:00"
+    data_date=(date2, date3)
     lab = Label(display_attend, text="date|mem_no|act_name|name|f_no|a_no|eid")
     lab.grid(row=0, column=0)
     con = sqlite3.connect("identifier.sqlite")
     curr = con.cursor()
-    curr.execute("select * from attendance where date=" + str(date1))
+    q="select * from attendance where date between ? and ?"
+    curr.execute(q,data_date)
     records = curr.fetchall()
     # print(records)
     print_records = ''
@@ -351,6 +359,77 @@ def display_attendance():
     export_btn.grid(row=200, column=0)
     curr.close()
 
+def graph1():
+    con = sqlite3.connect("identifier.sqlite")
+    mycur = con.cursor()
+    a = pd.read_sql("""SELECT act_name, COUNT(*) as "count per day"
+                     FROM attendance
+                     WHERE date=date('now')
+                     GROUP BY act_name;""", con)
+    print(a)
+    graph1_screen = tk.Tk()
+    figure = plt.Figure(figsize=(6, 5), dpi=100)
+    ax = figure.add_subplot(111)
+    chart_type = FigureCanvasTkAgg(figure, graph1_screen)
+    chart_type.get_tk_widget().pack()
+
+    a.plot(x="act_name", y="count per day", kind='bar', legend=True, ax=ax)
+    ax.set_title('The Title for your chart')
+    graph1_screen.mainloop()
+def graph2():
+    con = sqlite3.connect("identifier.sqlite")
+    mycur = con.cursor()
+    a = pd.read_sql("""SELECT a.act_name as "ACTIVITY NAME", COUNT(*)*cost AS "Total Cost"
+                       FROM attendance a, activities ac
+                       WHERE a.a_no=ac.a_no
+                       GROUP BY a.act_name;""", con)
+    print(a)
+    graph2_screen = tk.Tk()
+    graph2_screen.geometry("800x600")
+    figure = plt.Figure(figsize=(7, 6), dpi=100)
+    ax = figure.add_subplot(111)
+    chart_type = FigureCanvasTkAgg(figure, graph2_screen)
+    chart_type.get_tk_widget().pack()
+
+    a.plot(x="ACTIVITY NAME", y="Total Cost", kind='bar', legend=True, ax=ax)
+    ax.set_title('activity vs earning')
+    graph2_screen.mainloop()
+def graph3():
+    con = sqlite3.connect("identifier.sqlite")
+    mycur = con.cursor()
+    a = pd.read_sql("""SELECT act_name, COUNT(*) as "WEEKLY COUNT"
+                       FROM attendance
+                       WHERE Date> (SELECT DATETIME('now', '-7 day'))
+                       GROUP BY act_name;""", con)
+    print(a)
+    graph2_screen = tk.Tk()
+    graph2_screen.geometry("800x600")
+    figure = plt.Figure(figsize=(7, 6), dpi=100)
+    ax = figure.add_subplot(111)
+    chart_type = FigureCanvasTkAgg(figure, graph2_screen)
+    chart_type.get_tk_widget().pack()
+
+    a.plot(x="act_name", y="WEEKLY COUNT", kind='bar', legend=True, ax=ax)
+    ax.set_title('activity vs earning')
+    graph2_screen.mainloop()
+def graph4():
+    con = sqlite3.connect("identifier.sqlite")
+    mycur = con.cursor()
+    a = pd.read_sql("""SELECT a.act_name, COUNT(*)*ac.cost as "WEEKLY COUNT"
+                       FROM attendance a, activities ac
+                       WHERE a.a_no=ac.a_no and a.Date> (SELECT DATETIME('now', '-7 day'))
+                       GROUP BY a.act_name;""", con)
+    print(a)
+    graph2_screen = tk.Tk()
+    graph2_screen.geometry("800x600")
+    figure = plt.Figure(figsize=(7, 6), dpi=100)
+    ax = figure.add_subplot(111)
+    chart_type = FigureCanvasTkAgg(figure, graph2_screen)
+    chart_type.get_tk_widget().pack()
+
+    a.plot(x="act_name", y="WEEKLY COUNT", kind='bar', legend=True, ax=ax)
+    ax.set_title('activity vs earning')
+    graph2_screen.mainloop()
 
 # region membership table querying and buttons
 top = Label(manager, text="NEW MEMBERS",  font="verdana 12 bold").grid(row=0, column=1)
@@ -562,12 +641,12 @@ b3 = ttk.Button(manager, text="DELETE", width="20", command=delete_fam).grid(row
 empty = Label(manager).grid(row=20, column=8)
 # endregion
 
-b3 = ttk.Button(manager, text="login setup", width="20", command=run_loginsetup).grid(row=30,column=8)
+b3 = ttk.Button(manager, text="login setup", width="20", command=run_loginsetup).grid(row=28,column=8)
 
-
-
-
-
+graph_btn=ttk.Button(manager,text="count per day",width="20",command=graph1).grid(row=29,column=8)
+graph_btn2=ttk.Button(manager,text="money earned",width="20",command=graph2).grid(row=30,column=8)
+graph_btn2=ttk.Button(manager,text="last 7 days traffic",width="20",command=graph3).grid(row=31,column=8)
+graph_btn2=ttk.Button(manager,text="last 7 days earning",width="20",command=graph4).grid(row=32,column=8)
 # Set the initial theme
 
 
@@ -582,7 +661,7 @@ def change_theme():
 
 # Remember, you have to use ttk widgets
 button = ttk.Button(manager, text="Change theme!", command=change_theme)
-button.grid(row=31,column=8)
+button.grid(row=33,column=8)
 
 
 manager.mainloop()
