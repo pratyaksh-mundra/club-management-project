@@ -374,7 +374,7 @@ def graph1():
     chart_type.get_tk_widget().pack()
 
     a.plot(x="act_name", y="count per day", kind='bar', legend=True, ax=ax)
-    ax.set_title('The Title for your chart')
+    ax.set_title('activity vs count')
     graph1_screen.mainloop()
 def graph2():
     con = sqlite3.connect("identifier.sqlite")
@@ -410,7 +410,7 @@ def graph3():
     chart_type.get_tk_widget().pack()
 
     a.plot(x="act_name", y="WEEKLY COUNT", kind='bar', legend=True, ax=ax)
-    ax.set_title('activity vs earning')
+    ax.set_title('acount per week')
     graph2_screen.mainloop()
 def graph4():
     con = sqlite3.connect("identifier.sqlite")
@@ -428,7 +428,7 @@ def graph4():
     chart_type.get_tk_widget().pack()
 
     a.plot(x="act_name", y="WEEKLY COUNT", kind='bar', legend=True, ax=ax)
-    ax.set_title('activity vs earning')
+    ax.set_title('earning per week')
     graph2_screen.mainloop()
 
 # region membership table querying and buttons
@@ -641,12 +641,12 @@ b3 = ttk.Button(manager, text="DELETE", width="20", command=delete_fam).grid(row
 empty = Label(manager).grid(row=20, column=8)
 # endregion
 
-b3 = ttk.Button(manager, text="login setup", width="20", command=run_loginsetup).grid(row=28,column=8)
+b3 = ttk.Button(manager, text="login setup", width="20", command=run_loginsetup).grid(row=21,column=8)
 
-graph_btn=ttk.Button(manager,text="count per day",width="20",command=graph1).grid(row=29,column=8)
-graph_btn2=ttk.Button(manager,text="money earned",width="20",command=graph2).grid(row=30,column=8)
-graph_btn2=ttk.Button(manager,text="last 7 days traffic",width="20",command=graph3).grid(row=31,column=8)
-graph_btn2=ttk.Button(manager,text="last 7 days earning",width="20",command=graph4).grid(row=32,column=8)
+graph_btn=ttk.Button(manager,text="count per day",width="20",command=graph1).grid(row=22,column=8)
+graph_btn2=ttk.Button(manager,text="money earned",width="20",command=graph2).grid(row=23,column=8)
+graph_btn2=ttk.Button(manager,text="last 7 days traffic",width="20",command=graph3).grid(row=24,column=8)
+graph_btn2=ttk.Button(manager,text="last 7 days earning",width="20",command=graph4).grid(row=25,column=8)
 # Set the initial theme
 
 
@@ -661,7 +661,7 @@ def change_theme():
 
 # Remember, you have to use ttk widgets
 button = ttk.Button(manager, text="Change theme!", command=change_theme)
-button.grid(row=33,column=8)
+button.grid(row=26,column=8)
 
 
 manager.mainloop()
